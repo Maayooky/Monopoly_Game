@@ -17,12 +17,12 @@
   ],
   "series": [
       {
-        “name”: “aaa”, 
-        “assets”: [
+        "name": "",
+        "assets": [
           {
-            “name”: “”, 
-            “policytype”: “”, 
-            “owner”: ""
+            "name": "",
+            "policy-type": "",
+            "owner": ""
           }
         ]
       }

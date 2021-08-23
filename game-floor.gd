@@ -10,7 +10,7 @@ func load_template():
 		print_debug(res.error_string)
 		print_debug(res.error_line) 
 	if not typeof(res.result) == TYPE_ARRAY:
-		push_error("Failed loading basic_shapes")
+		push_error("Failed loading template")
 	return res.result
 
 

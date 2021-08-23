@@ -1,0 +1,32 @@
+{
+"name": "master-template",
+"size": 10,
+"round-reward": 0,
+"dice-max": 6,
+"dice-count": 2,
+"inflation": 0,
+"playrs": [
+    {
+    "name": "p1", 
+    "cash": 0, 
+    "holdings": [], 
+    "position": 0, 
+    "cards": [], 
+    "skin": "" 
+    }
+  ],
+  "series": [
+      {
+        “name”: “aaa”, 
+        “assets”: [
+          {
+            “name”: “”, 
+            “policytype”: “”, 
+            “owner”: ""
+          }
+        ]
+      }
+    ]
+}
+
+

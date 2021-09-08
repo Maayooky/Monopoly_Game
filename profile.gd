@@ -1,8 +1,8 @@
-extends Node
+class_name GameProfile
 
-func load_template():
+func load_profile(name):
 	var file = File.new()
-	file.open("res://model/template.json", File.READ)
+	file.open("res://model/{}.json".format(name), File.READ)
 	var content = file.get_as_text()
 	file.close()
 	var res: JSONParseResult = JSON.parse(content)
@@ -14,5 +14,3 @@ func load_template():
 	return res.result
 
 
-func _ready():
-	load_template()

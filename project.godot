@@ -14,15 +14,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://card.gd"
 }, {
-"base": "Reference",
+"base": "Object",
+"class": "GameBoard",
+"language": "GDScript",
+"path": "res://board.gd"
+}, {
+"base": "Object",
+"class": "GameContext",
+"language": "GDScript",
+"path": "res://context.gd"
+}, {
+"base": "Object",
 "class": "GameProfile",
 "language": "GDScript",
 "path": "res://profile.gd"
 }, {
-"base": "Object",
+"base": "MonopolyResource",
 "class": "Holding",
 "language": "GDScript",
 "path": "res://holding.gd"
+}, {
+"base": "Reference",
+"class": "MonopolyResource",
+"language": "GDScript",
+"path": "res://resource.gd"
 }, {
 "base": "Object",
 "class": "Player",
@@ -36,8 +51,11 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Card": "",
+"GameBoard": "",
+"GameContext": "",
 "GameProfile": "",
 "Holding": "",
+"MonopolyResource": "",
 "Player": "",
 "SeriesHolding": ""
 }

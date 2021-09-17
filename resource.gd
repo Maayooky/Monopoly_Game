@@ -2,22 +2,23 @@ class_name MonopolyResource
 
 func _get_resource_dir(): pass
 
-func load(tags):
-	loaded_resouces = {}
-	file_name = ""
-	path = "res://{}".format(_get_resource_dir())
+func load_from_dir(tags):
+	var loaded = {}
+	var file_name = ""
+	var path = "res://{}".format(_get_resource_dir())
 	var dir = Directory.new()
 	if dir.open(path) == OK:
 		dir.list_dir_begin()
 		file_name = dir.get_next()
 		while file_name != "":
-			res = load_resource("{}/{}".format(path, file_name))
+			var res = load_resource("{}/{}".format(path, file_name))
 			for tag in tags:
 				if tag in res.tags:
-					loaded_resources[res.name] = res
-	return loaded_resources
+					loaded[res.name] = res
+			file_name = dir.get_next()
+	return loaded
 	
-func load_resource(path)
+func load_resource(path):
 	var file = File.new()
 	file.open(path, File.READ)
 	var content = file.get_as_text()

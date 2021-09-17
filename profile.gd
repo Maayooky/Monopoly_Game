@@ -2,7 +2,7 @@ class_name GameProfile
 
 func load_profile(name):
 	var file = File.new()
-	file.open("res://model/{}.json".format(name), File.READ)
+	file.open("res://{}.json".format(name), File.READ)
 	var content = file.get_as_text()
 	file.close()
 	var res: JSONParseResult = JSON.parse(content)

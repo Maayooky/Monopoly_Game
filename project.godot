@@ -8,9 +8,38 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Object",
+"class": "Card",
+"language": "GDScript",
+"path": "res://card.gd"
+}, {
+"base": "Reference",
+"class": "GameProfile",
+"language": "GDScript",
+"path": "res://profile.gd"
+}, {
+"base": "Object",
+"class": "Holding",
+"language": "GDScript",
+"path": "res://holding.gd"
+}, {
+"base": "Object",
+"class": "Player",
+"language": "GDScript",
+"path": "res://player.gd"
+}, {
+"base": "Object",
+"class": "SeriesHolding",
+"language": "GDScript",
+"path": "res://series_holding.gd"
+} ]
 _global_script_class_icons={
-
+"Card": "",
+"GameProfile": "",
+"Holding": "",
+"Player": "",
+"SeriesHolding": ""
 }
 
 [application]

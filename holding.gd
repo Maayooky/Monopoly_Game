@@ -1,4 +1,4 @@
-extends Object
+extends MonopolyResource
 class_name Holding
 
 var name = ""

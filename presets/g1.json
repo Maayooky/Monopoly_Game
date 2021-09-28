@@ -1,0 +1,7 @@
+{
+	"board":
+	[
+		{"series_name": "domino", "holding_name": "Tel-Aviv", "position": 1, "player": "p1"},
+		{"series_name": "domino", "holding_name": "Tel-Hanan", "position": 2, "player": "p2"}
+	]
+}	

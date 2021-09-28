@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://context.gd"
 }, {
-"base": "Object",
+"base": "Resource",
 "class": "GameProfile",
 "language": "GDScript",
 "path": "res://profile.gd"
@@ -34,7 +34,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://holding.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "MonopolyResource",
 "language": "GDScript",
 "path": "res://resource.gd"
@@ -65,6 +65,10 @@ _global_script_class_icons={
 config/name="Monopoly"
 run/main_scene="res://Node.tscn"
 config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray(  )
 
 [rendering]
 

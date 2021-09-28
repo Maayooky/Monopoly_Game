@@ -1,10 +1,13 @@
-extends Object
+extends MonopolyResource
 class_name SeriesHolding
 
 var _holdings = {}
 var size = -1 
 var name = ""
 
+func _get_resource_dir():
+	return "holdins"
+	
 func is_series():
 	return size>0 and _holdings.keys().count() == size 
 

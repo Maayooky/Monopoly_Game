@@ -6,7 +6,7 @@ var cash = 0
 var holding_positions = []
 var position = 0
 var cards = []
-var skin = NAN
+var skin = null
 
 func add_holding(pos: int):
 	holding_positions.append(pos)

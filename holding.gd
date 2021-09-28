@@ -1,4 +1,4 @@
-extends MonopolyResource
+extends Object
 class_name Holding
 
 var name = ""
@@ -10,6 +10,3 @@ func _assets_formula(price):
 	
 func _securities_formula(price):
 	pass
-
-func _get_resource_dir():
-	return "holdings"

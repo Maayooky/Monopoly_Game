@@ -1,7 +1,17 @@
 {
-	"board":
+  "board": 
 	[
-		{"series_name": "domino", "holding_name": "Tel-Aviv", "position": 1, "player": "p1"},
-		{"series_name": "domino", "holding_name": "Tel-Hanan", "position": 2, "player": "p2"}
+		{
+		  "series_name": "domino",
+		  "holding_name": "Tel-Aviv",
+		  "player": "p1",
+		  "position": 1
+		},
+		{
+		  "series_name": "domino",
+		  "holding_name": "Tel-Hanan",
+		  "player": "p2",
+		  "position": 2
+		}
 	]
-}	
+}

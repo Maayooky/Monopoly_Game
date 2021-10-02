@@ -2,10 +2,14 @@ extends MonopolyResource
 class_name GameBoard
 
 var context = null
-var sname = "g1"
 
-func _get_resource_dir():
+#func _init():
+
+func get_resource_dir():
 	return "presets" 
+	
+
+
 
 func load_from_saved(save_name): 
 	var saved_board = load_by_file_name(save_name)

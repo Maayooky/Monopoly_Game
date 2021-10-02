@@ -1,18 +1,20 @@
 extends Object
 class_name MonopolyResource
 
-func _get_resource_dir(): pass
-
+func get_resource_dir(): 
+	return "NotImplemented"
+	
+	
 func load_by_attirbutes(attributes):
 	var loaded = {}
 	var file_name = ""
-	var path = "res://{}".format(_get_resource_dir())
+	var path = "res://%s"%get_resource_dir()
 	var dir = Directory.new()
 	if dir.open(path) == OK:
 		dir.list_dir_begin()
 		file_name = dir.get_next()
 		while file_name != "":
-			var res = load_resource("{}/{}".format(path, file_name))
+			var res = load_resource("%s/%s" % [path, file_name])
 			for name in attributes:
 				for value in attributes[name]:
 					if res.get(name)!=null and value in res.get(name):
@@ -27,8 +29,8 @@ func load_by_name(names):
 	return load_by_attirbutes({"name": names})
 
 func load_by_file_name(file_name, file_ext=".json"):
-	var path = "res://{}".format(_get_resource_dir())
-	return load_resource("{}/{}{}".format([path, file_name, file_ext]))
+	var path = "res://%s" % get_resource_dir()
+	return load_resource("%s/%s%s" % [path, file_name, file_ext])
 
 func load_resource(path):
 	"""
@@ -37,12 +39,10 @@ func load_resource(path):
 	if path.ends_with(".json"):
 		var file = File.new()
 		file.open(path, File.READ)
-		var content = file.get_as_text()
-		file.close()
+		var content: String = file.get_as_text()
 		var res: JSONParseResult = JSON.parse(content)
-		if res.error != OK:
-			print_debug(res.error_string)
-			print_debug(res.error_line)
+		if res.error_line > -1:
+			print_debug("ERROR parsing json: line=%s, error=%s" % [res.error_line, res.error_string])
 			push_error("Failed loading resource") 
 		return res.result
 	else:

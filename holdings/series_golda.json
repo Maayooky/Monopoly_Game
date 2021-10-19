@@ -3,4 +3,5 @@
 "tags": ["icecreem", "food", "dessert"],
 "holdings": ["hadera", "jerusalem", "mishmar", "netania"],
 "icon": ""
+"formula": "x: x+2"
 }

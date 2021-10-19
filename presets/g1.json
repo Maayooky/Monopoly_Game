@@ -1,17 +1,29 @@
 {
-  "board": 
+  "profile":
+	{
+		"name": "basic",
+		"size": 10,
+		"round_reward": 0,
+		"dice_max": 6,
+		"dice_count": 2,
+		"inflation": 0
+	},
+	"board": 
 	[
 		{
-		  "series_name": "domino",
+		  "series_name": "series_golda",
 		  "holding_name": "Tel-Aviv",
-		  "player": "p1",
-		  "position": 1
+		  "owner": "p1",
+		  "position": "1"
+		  "basic_price": 22
 		},
 		{
-		  "series_name": "domino",
+		  "series_name": "series_golda",
 		  "holding_name": "Tel-Hanan",
-		  "player": "p2",
-		  "position": 2
+		  "owner": "p2",
+		  "position": "2",
+		  "basic_price": 22
 		}
 	]
+	
 }

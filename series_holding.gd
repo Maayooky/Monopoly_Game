@@ -6,7 +6,7 @@ var size = -1
 var name = ""
 
 func _get_resource_dir():
-	return "holdins"
+	return "holdings"
 	
 func is_series():
 	return size>0 and _holdings.keys().count() == size 
@@ -20,6 +20,13 @@ func add(holding: Holding):
 func remove(holding: Holding):
 	_holdings.erase(holding.name)
 
+func get_visit_price(holding: Holding, factor=1):
+	var prime = holding.prime_assets
+	var basic = holding.basic_assets
+	var purchase = holding.purchase
+	return purchase * (prime+1) * (basic+1) * factor
 
+func get_mortgage(holding: Holding):
+	return get_visit_price(holding) / 2
 
 

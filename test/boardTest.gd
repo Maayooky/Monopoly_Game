@@ -19,5 +19,5 @@ func assert_context(ctx) -> void:
 
 func test_load_from_saved() -> void:
 	var board = GameBoard.new()
-	board.load_by_file_name("g1")	
+	board.load_from_saved("g1")	
 	assert_context(board.context)

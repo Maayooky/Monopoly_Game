@@ -2,6 +2,7 @@
 class_name GdUnitSceneRunner
 extends Node
 
+var _test_suite :WeakRef
 var _scene_tree :SceneTree = null
 var _scene :Node = null
 var _scene_name :String
@@ -16,7 +17,8 @@ var _time_factor := 1.0
 var _saved_time_scale :float
 var _saved_iterations_per_second :float
 
-func _init(scene :Node, verbose :bool):
+func _init(test_suite :WeakRef, scene :Node, verbose :bool):
+	_test_suite = test_suite
 	assert(scene != null, "Scene must be not null!")
 	_scene_tree = Engine.get_main_loop()
 	_scene_tree.root.add_child(self)
@@ -36,9 +38,11 @@ func _init(scene :Node, verbose :bool):
 func _tree_exiting():
 	if is_instance_valid(_scene):
 		self.remove_child(_scene)
+	_test_suite = null
 
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
+		_test_suite = null
 		# reset time factor to normal
 		__deactivate_time_factor()
 		# we hide the scene/main window after runner is finished 
@@ -173,11 +177,18 @@ func simulate_frames(frames: int) -> GdUnitSceneRunner:
 	_is_simulate_runnig = false
 	return self
 
-# Simulates scene processing until the given signal is emited by the scene
+# Simulates scene processing until the given signal is emitted by the scene
 # signal_name: the signal to stop the simulation
-# arg..: optional signal arguments to be match for stop
+# arg..: optional signal arguments to be matched for stop
 func simulate_until_signal(signal_name :String, arg0 = null, arg1 = null, arg2 = null, arg3 = null, arg4 = null, arg5 = null) -> GdUnitSceneRunner:
-	_scene.connect(signal_name, self, "__interupt_simulate")
+	return simulate_until_object_signal(_scene, signal_name, arg0, arg1, arg2, arg3, arg4, arg5)
+
+# Simulates scene processing until the given signal is emitted by the given object
+# source: the object that should emit the signal
+# signal_name: the signal to stop the simulation
+# arg..: optional signal arguments to be matched for stop	
+func simulate_until_object_signal(source :Object, signal_name :String, arg0 = null, arg1 = null, arg2 = null, arg3 = null, arg4 = null, arg5 = null) -> GdUnitSceneRunner:
+	source.connect(signal_name, self, "__interupt_simulate")
 	_expected_signal_args = [arg0, arg1, arg2, arg3, arg4, arg5]
 	_is_simulate_runnig = true
 	__activate_time_factor()
@@ -185,6 +196,33 @@ func simulate_until_signal(signal_name :String, arg0 = null, arg1 = null, arg2 =
 		yield(get_tree(), "idle_frame")
 	__deactivate_time_factor()
 	return self
+
+# Waits for function return value until specified timeout or fails
+# instance: the object instance where implements the function
+# args : optional function arguments
+func wait_func(instance :Object, func_name :String, args := [], expeced := GdUnitAssert.EXPECT_SUCCESS) -> GdUnitFuncAssert:
+	__activate_time_factor()
+	return GdUnitFuncAssertImpl.new(_test_suite, instance, func_name, args, expeced)
+
+# Waits for given signal until specified timeout or fails
+# instance: the object where emittes the signal
+# signal_name: signal name
+# args: args send be the signal
+# timeout: the timeout in ms, default is set to 2000ms
+func wait_emit_signal(instance :Object, signal_name :String, args := [], timeout := 2000, expeced := GdUnitAssert.EXPECT_SUCCESS) -> GdUnitSignalAssert:
+	_is_simulate_runnig = true
+	__activate_time_factor()
+	var assert_signal = GdUnitSignalAssertImpl.new(_test_suite, instance, expeced)
+	var fs = assert_signal.wait_until(timeout).is_emitted(signal_name, args)
+	fs.connect("completed", self, "__wait_signal_completed")
+	
+	while _is_simulate_runnig:
+		yield(fs, "completed")
+	__deactivate_time_factor()
+	return assert_signal
+
+func __wait_signal_completed(arg):
+	_is_simulate_runnig = false
 
 func __interupt_simulate(arg0 = null, arg1 = null, arg2 = null, arg3 = null, arg4 = null, arg5 = null):
 	var current_signal_args = [arg0, arg1, arg2, arg3, arg4, arg5]
